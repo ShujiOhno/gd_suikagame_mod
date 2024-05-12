@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://cctntuqi8rd6g"]
+
+[ext_resource type="Script" path="res://Title.gd" id="1_aadb6"]
+[ext_resource type="FontFile" uid="uid://dc5g3v0guqv7o" path="res://assets/fonts/mplus-1m-regular.otf" id="3_erdak"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_m0yqa"]
+font = ExtResource("3_erdak")
+font_size = 100
+
+[sub_resource type="LabelSettings" id="LabelSettings_6rwhn"]
+font = ExtResource("3_erdak")
+font_size = 50
+
+[node name="Title" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aadb6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(0.6, 0.6)
+
+[node name="LabelTitle" type="Label" parent="."]
+layout_mode = 0
+offset_left = 292.0
+offset_top = 81.0
+offset_right = 892.0
+offset_bottom = 221.0
+text = "スイカゲーム"
+label_settings = SubResource("LabelSettings_m0yqa")
+
+[node name="ButtonStart" type="Button" parent="."]
+layout_mode = 0
+offset_left = 411.0
+offset_top = 334.0
+offset_right = 769.0
+offset_bottom = 413.0
+theme_override_fonts/font = ExtResource("3_erdak")
+theme_override_font_sizes/font_size = 50
+text = "ゲームスタート"
+
+[node name="VolumeSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 791.0
+offset_top = 564.0
+offset_right = 1145.0
+offset_bottom = 605.0
+max_value = 1.0
+step = 0.01
+
+[node name="LabelVolume" type="Label" parent="."]
+layout_mode = 0
+offset_left = 785.0
+offset_top = 510.0
+offset_right = 1145.0
+offset_bottom = 580.0
+text = "音量:"
+label_settings = SubResource("LabelSettings_6rwhn")
+
+[connection signal="pressed" from="ButtonStart" to="." method="_on_button_start_pressed"]
+[connection signal="value_changed" from="VolumeSlider" to="." method="_on_volume_slider_value_changed"]

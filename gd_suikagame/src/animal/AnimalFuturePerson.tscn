@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfuwywq2fl0ui"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://d1ukrhuj3jrd0" path="res://assets/animal_physics_material.tres" id="1_pklbp"]
+[ext_resource type="Script" path="res://src/animal/Animal.gd" id="2_1fnya"]
+[ext_resource type="Texture2D" uid="uid://5fb0flgpn81r" path="res://assets/images/animals/future_person.png" id="3_8q8uj"]
+
+[node name="AnimalFuturePerson" type="RigidBody2D"]
+physics_material_override = ExtResource("1_pklbp")
+max_contacts_reported = 8
+contact_monitor = true
+script = ExtResource("2_1fnya")
+id = 11
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_8q8uj")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.6, 0.6)
+polygon = PackedVector2Array(22, -235.9, 22, -232.9, 58, -188.8, 58, -185, 66, -166, 66, -161.3, 57.7, -134, 54.5, -134, 34.5, -121, 32.2, -121, 14.5, -120.2, 8.60001, -115.4, 32, -104.1, 32, -99.9, 72.7, 0.799988, 107.9, 26.1, 105.6, 33, 102.3, 33, 81, 44.3, 81, 37.4, 64, 23.4, 64, 20.8, 53, 7.70001, 53, 10.4, 65, 28.5, 65, 40.9, 53.5, 72, 51, 72, 33, 88.3, 33, 99.8, 52, 135.8, 52, 141.4, 63.7, 231, 59.5, 231, 47.5, 247, 37.3, 247, 30, 241.5, 30, 231, 30.9, 183.3, -20.4, 55.2, -28.7, 174.7, -17.1, 245, -22.8, 245, -39, 253.1, -39, 246, -48, 237.1, -48, 226, -50.7, 187.7, -64, 147.8, -64, 136, -65.8, 98.5, -96, 78.7, -96, 74.7, -107.3, 40.7, -120, 44.9, -120, 38.9, -126.9, 30.8, -124.2, 25, -122.1, 25, -95, -3.89999, -95, -5.3, -69, -53.3, -69, -55.8, -53.7, -104, -49.9, -104, -31.5, -109.9, -36.9, -112.1, -74, -104.9, -74, -110, -96, -133, -96, -152.8, -72.6, -221, -70, -221, -50.1, -241, -46.7, -241, -31, -245.7, -31, -249.4)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

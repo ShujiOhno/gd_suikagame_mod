@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd0bu3pmka3mx"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://d1ukrhuj3jrd0" path="res://assets/animal_physics_material.tres" id="1_273h2"]
+[ext_resource type="Script" path="res://src/animal/Animal.gd" id="2_342rc"]
+[ext_resource type="Texture2D" uid="uid://yut4f2yva2c" path="res://assets/images/animals/amoeba.png" id="3_764iy"]
+
+[node name="AnimalAmoeba" type="RigidBody2D"]
+physics_material_override = ExtResource("1_273h2")
+max_contacts_reported = 8
+contact_monitor = true
+script = ExtResource("2_342rc")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("3_764iy")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.073, 0.073)
+polygon = PackedVector2Array(76, -195.4, 76, -192.2, 91, -178.2, 91, -163.7, 61, -137.7, 56.3, -121.6, 135, -97.7, 135, -95.4, 165.9, -70, 167.3, -70, 180, -68.4, 180, -64.8, 195, -46.8, 195, -43.5, 212, 36.5, 230, 31.4, 230, 36.8, 239, 44.8, 239, 57.4, 244.2, 81, 238, 81, 220.3, 87.7, 219.2, 90.7, 248, 112.5, 248, 124.2, 244.1, 132, 241.3, 132, 216, 146.8, 209.4, 164, 202.8, 164, 178, 162.4, 178, 182, 173.8, 182, 167.8, 187, 132.8, 187, 95.8, 199, 76.8, 199, 7.89999, 192.5, -84, 202.6, -84, 200.5, -170, 190.5, -170, 189, -187, 185, -187, 180.7, -188.6, 176, -210.5, 176, -226, 173.2, -226, 170, -231.9, 164.2, -229.3, 158, -226.4, 158, -219.2, 153.9, -224, 150.7, -224, 147.7, -232.7, 118, -227.7, 118, -219.7, 106, -216, 106, -201, 98.9, -201, 96.2, -229.7, 84, -228.1, 76, -225.3, 76, -202, 49.1, -202, 48.1, -178.5, -16, -177, -16, -150.9, -62, -148.7, -62, -92.7, -106, -88.6, -106, -10.4, -123, -11.3, -128.5, -42, -150.4, -42, -168.7, -29.5, -185, -25.1, -185, 19.5, -185.9, 44, -196.3, 44, -199.7)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

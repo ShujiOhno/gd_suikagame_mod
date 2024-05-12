@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://be8ehvbv7s3xb"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://d1ukrhuj3jrd0" path="res://assets/animal_physics_material.tres" id="1_ct15e"]
+[ext_resource type="Script" path="res://src/animal/Animal.gd" id="2_umido"]
+[ext_resource type="Texture2D" uid="uid://b3rarywc4agyx" path="res://assets/images/animals/shark.png" id="3_gtb6u"]
+
+[node name="AnimalShark" type="RigidBody2D"]
+physics_material_override = ExtResource("1_ct15e")
+max_contacts_reported = 8
+contact_monitor = true
+script = ExtResource("2_umido")
+id = 4
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.32, 0.32)
+texture = ExtResource("3_gtb6u")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.16, 0.16)
+polygon = PackedVector2Array(20, -238, 20, -235.6, 74, -196.6, 74, -193.5, 100, -153.5, 100, -149, 108.4, -93.8, 139, -58.9, 139, -56.2, 154, -23.1, 154, -14.9, 146.2, 2, 131.4, 2, 94.9, -6.5, 97.9, 12, 90.3, 12, 68.7, 5.60001, 67.7, 24, 58.5, 24, 38.1, 11, 23.1, 26, 20.4, 26, 46, 37.8, 46, 40.7, 50.8, 49, 51.4, 49, 75, 52.7, 75, 61, 49.3, 75, 26.9, 75, 63.9, 90, 68.5, 90, 98.4, 87.3, 113, 79, 139.9, 25, 143.8, 25, 181.8, 6, 186.5, 6, 207.5, 4, 208, 9, 211.6, 10.9, 188.4, 68, 185.6, 68, 153.7, 89.3, 177.1, 136, 164, 136, 129.8, 121.6, 97.4, 163, 94, 163, 46.4, 178.6, 57.7, 217, 52.4, 217, 28.4, 247, 13.5, 247, -8, 217.6, -8, 212, -20.8, 179.1, -33.1, 171.4, -41.7, 226, -45.2, 226, -71.2, 248, -83.7, 248, -91, 242.5, -91, 239.5, -106, 217.5, -106, 207.3, -102.7, 194.9, -116, 134.5, -116, 108.9, -115.1, 79.4, -154, 55.8, -154, 51.5, -158, 34.6, -158, 27.5, -128, 17, -128, 22.1, -116.3, 28.9, -111, 19.3, -139.2, 3.29999, -141.8, 19, -149.5, 19, -160.3, 11.9, -165.3, 15.9, -171, 13.1, -171, 10, -180.3, -11.1, -191, -12.7, -191, -19.4, -188.6, -36.1, -214, -47.8, -214, -50.5, -225.8, -67.7, -223, -73, -222.1, -73, -211.1, -95, -208.9, -95, -190, -111.3, -190, -111.9, -167.4, -170, -165.6, -170, -145.6, -199, -143.8, -199, -101.8, -234, -98.9, -234, -50, -249.7, -50, -253.2)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

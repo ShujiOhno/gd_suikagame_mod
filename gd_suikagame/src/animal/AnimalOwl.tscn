@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cb2dc3gv34pva"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://d1ukrhuj3jrd0" path="res://assets/animal_physics_material.tres" id="1_8ps1l"]
+[ext_resource type="Script" path="res://src/animal/Animal.gd" id="3_gqsp3"]
+[ext_resource type="Texture2D" uid="uid://ckuymsmy3log7" path="res://assets/images/animals/owl.png" id="3_w61rt"]
+
+[node name="AnimalOwl" type="RigidBody2D"]
+physics_material_override = ExtResource("1_8ps1l")
+max_contacts_reported = 8
+contact_monitor = true
+script = ExtResource("3_gqsp3")
+id = 7
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_w61rt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.2, 0.2)
+polygon = PackedVector2Array(111.8, -239.3, 109, -234, 107.8, -234, 104.5, -228.3, 111.9, -219.9, 109.2, -214, 107.7, -214, 93.3, -192.3, 126, -115, 126, -109, 127.3, -85, 123.1, -85, 94.1, -55, 90.9, -55, 67.4, -45.4, 108.1, -2, 109.4, -2, 171, 35.2, 171, 51, 191.9, 68.4, 189.5, 75, 185.9, 75, 177.8, 78.4, 175.1, 92, 169.3, 92, 157, 92.7, 157, 108, 140.1, 108, 127.7, 103.4, 122.9, 112, 114.5, 112, 95, 116.1, 85, 126, 85, 126.8, 73.3, 161.8, 87.7, 168, 86.1, 176, 83.6, 176, 72, 192.6, 72, 194.8, 57.7, 240, 54.8, 240, 45.9, 248, 33.3, 248, 7, 240.8, 7, 223.9, 7.89999, 193, 4, 185.2, 0, 192.4, 0, 215.3, 3.70001, 243, -1.3, 243, -9.3, 249, -17.2, 249, -43, 246.5, -43, 241.9, -59.3, 202, -79, 178.8, -79, 168, -62.8, 164.2, -73.7, 129.9, -108.9, 105.5, -137, 118.9, -137, 110.7, -140.5, 100.2, -169, 103.6, -169, 87.2, -190.7, 79.2, -189.2, 71, -186.4, 71, -159.4, 37, -156.9, 37, -68.2, -40.3, -77.6, -54, -79.1, -54, -106, -66.8, -106, -69.3, -116, -82.3, -116, -90.6, -93, -180.6, -106, -185.6, -106, -188.4, -120, -207.4, -120, -210.3, -127.3, -242, -119.3, -242, -58.9, -225.7, -9.8, -241, 9.70001, -241, 51.2, -229.6, 97, -247.5, 97, -248.7, 104.1, -250.9)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

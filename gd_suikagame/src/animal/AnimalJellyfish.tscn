@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://bn7yohjny6sls"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://d1ukrhuj3jrd0" path="res://assets/animal_physics_material.tres" id="1_b3ibx"]
+[ext_resource type="Script" path="res://src/animal/Animal.gd" id="2_qrdke"]
+[ext_resource type="Texture2D" uid="uid://c1t8e4fsom85b" path="res://assets/images/animals/jellyfish.png" id="3_lbkjy"]
+
+[node name="AnimalJellyfish" type="RigidBody2D"]
+physics_material_override = ExtResource("1_b3ibx")
+max_contacts_reported = 8
+contact_monitor = true
+script = ExtResource("2_qrdke")
+id = 1
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_lbkjy")
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.3, 0.3)
+polygon = PackedVector2Array(-15.1, -76.9, -17.8, -71, -21.4, -71, -36, -67.8, -36, -83.7, -33, -85.7, -33, -87.5, -26.5, -89.9)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.3, 0.3)
+polygon = PackedVector2Array(90, -63.5, 90, -57.6, 84.3, -20, 75.5, -20, 35, -27.9, 35, -30.6, 25, -40, 18, -48.2, 13.6, -66, 18.7, -66, 33.7, -84, 40, -85, 47.5, -87.5, 52.5, -100, 60, -105, 67.5, -97.5, 65, -82.5)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.3, 0.3)
+polygon = PackedVector2Array(-54.2, -43.4, -57, -38, -61.2, -38, -78, -39.4, -78, -49.3, -72, -54.3, -72, -56.7, -65, -58.9)
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.3, 0.3)
+polygon = PackedVector2Array(7, -50.5, 7, -47.6, 32, -29.6, 32, -24.6, 33.4, -13, 35.1, -16, 40.3, -16, 57.8, -6.6, 55.9, 1, 53.3, 1, 35, 22.6, 50, 35.7, 50, 39.6, 52, 50.5, 52, 55.9, 41.4, 58.6, 50.1, 76, 34.4, 76, 36.6, 95, 27.7, 95, 20.8, 86.7, 21.3, 96, 12.8, 96, 4.8, 87.4, 0.800003, 103.5, -8, 102.4, -8, 98.1, -14.6, 83, -23.9, 96.9, -31, 94.7, -31, 94, -34.1, 94, -57, 92.7, -57, 87.9, -70.1, 51, -65.1, 51, -50, 19, -50, 12, -52.3, -31, -48.5, -31, -37.5, -46, -33.9, -46, -23, -50.4, -23, -53.5)
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.3, 0.3)
+polygon = PackedVector2Array(-57.2, 16.6, -59.2, 24, -62.3, 24, -71.5, 30.9, -77, 28.1, -77, 23.4, -75, 15.2, -75, 6.39999)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

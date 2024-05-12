@@ -6,16 +6,16 @@ extends Node2D
 # -----------------------------------------------
 # const.
 # -----------------------------------------------
-## フルーツ落下の高さ.
-const DROP_POS_Y = 120.0
+## 動物落下の高さ.
+const DROP_POS_Y = 60.0
 
 ## NEXT抽選用テーブル.
 const NEXT_TBL = [
-	Fruit.eFruit.BULLET, # 0:敵弾.
-	Fruit.eFruit.CARROT, # 1:人参.
-	Fruit.eFruit.RADISH, # 2:大根.
-	Fruit.eFruit.POCKY, # 3:ポッキー.
-	Fruit.eFruit.BANANA, # 4:バナナ.
+	Animal.eAnimal.AMOEBA, # 0
+	Animal.eAnimal.JELLYFISH, # 1
+	Animal.eAnimal.SQUID, # 2
+	Animal.eAnimal.CRAYFISH, # 3
+	Animal.eAnimal.SHARK, # 4
 ]
 
 ## 状態.
@@ -38,11 +38,11 @@ enum eState {
 @onready var _spr_line = $Line
 # CanvasLayer.
 @onready var _wall_layer = $WallLayer
-@onready var _fruit_layer = $FruitLayer
+@onready var _animal_layer = $AnimalLayer
 @onready var _particle_layer = $ParticleLayer
 @onready var _ui_layer = $UILayer
 # UI.
-@onready var _ui_now_fruit = $UILayer/NowFruit
+@onready var _ui_now_animal = $UILayer/NowAnimal
 @onready var _ui_dbg_label = $UILayer/DbgLabel
 @onready var _ui_evolution_label = $UILayer/Evolution/Label
 @onready var _ui_caption = $UILayer/Caption
@@ -59,12 +59,12 @@ enum eState {
 # -----------------------------------------------
 ## 状態.
 var _state := eState.INIT
-## 現在のフルーツ.
-var _now_fruit = Fruit.eFruit.BULLET
-## 次のフルーツ.
-var _next_fruit = Fruit.eFruit.BULLET
-## 落下させたフルーツ.
-var _fruit:Fruit = null
+## 現在の動物.
+var _now_animal = Animal.eAnimal.AMOEBA
+## 次の動物.
+var _next_animal = Animal.eAnimal.AMOEBA
+## 落下させた動物.
+var _animal:Animal = null
 ## BGMの状態.
 var _bgm_id = 0
 ## 進化の輪.
@@ -80,7 +80,7 @@ func _ready() -> void:
 	# レイヤーテーブル.
 	var layers = {
 		"wall": _wall_layer,
-		"fruit": _fruit_layer,
+		"animal": _animal_layer,
 		"particle": _particle_layer,
 		"ui": _ui_layer,
 	}
@@ -96,38 +96,38 @@ func _ready() -> void:
 ## 進化画像のセットアップ.
 func _setup_evolution() -> void:
 	# 進化画像.
-	_evolution_sprs[Fruit.eFruit.BULLET] = $UILayer/Evolution/Bullet
-	_evolution_sprs[Fruit.eFruit.CARROT] = $UILayer/Evolution/Carrot
-	_evolution_sprs[Fruit.eFruit.RADISH] = $UILayer/Evolution/Radish
-	_evolution_sprs[Fruit.eFruit.POCKY] = $UILayer/Evolution/Pocky
-	_evolution_sprs[Fruit.eFruit.BANANA] = $UILayer/Evolution/Banana
-	_evolution_sprs[Fruit.eFruit.NASU] = $UILayer/Evolution/Nasu
-	_evolution_sprs[Fruit.eFruit.TAKO] = $UILayer/Evolution/Tako
-	_evolution_sprs[Fruit.eFruit.NYA] = $UILayer/Evolution/Nya
-	_evolution_sprs[Fruit.eFruit.FIVE_BOX] = get_node("UILayer/Evolution/5Box")
-	_evolution_sprs[Fruit.eFruit.MILK] = $UILayer/Evolution/Milk
-	_evolution_sprs[Fruit.eFruit.PUDDING] = $UILayer/Evolution/Pudding
-	_evolution_sprs[Fruit.eFruit.XBOX] = $UILayer/Evolution/Xbox
+	_evolution_sprs[Animal.eAnimal.AMOEBA] = $UILayer/Evolution/Amoeba
+	_evolution_sprs[Animal.eAnimal.JELLYFISH] = $UILayer/Evolution/Jellyfish
+	_evolution_sprs[Animal.eAnimal.SQUID] = $UILayer/Evolution/Squid
+	_evolution_sprs[Animal.eAnimal.CRAYFISH] = $UILayer/Evolution/Crayfish
+	_evolution_sprs[Animal.eAnimal.SHARK] = $UILayer/Evolution/Shark
+	_evolution_sprs[Animal.eAnimal.FROG] = $UILayer/Evolution/Frog
+	_evolution_sprs[Animal.eAnimal.CROCODILE] = $UILayer/Evolution/Crocodile
+	_evolution_sprs[Animal.eAnimal.OWL] = $UILayer/Evolution/Owl
+	_evolution_sprs[Animal.eAnimal.PLATYPUS] = $UILayer/Evolution/Platypus
+	_evolution_sprs[Animal.eAnimal.CAT] = $UILayer/Evolution/Cat
+	_evolution_sprs[Animal.eAnimal.MONKEY] = $UILayer/Evolution/Monkey
+	_evolution_sprs[Animal.eAnimal.FUTURE_PERSON] = $UILayer/Evolution/FuturePerson
 	# 基準スケール値を保持.
 	for id in _evolution_sprs.keys():
 		_evolution_scales[id] = _evolution_sprs[id].scale
 
-# 次のフルーツを抽選する.
-func _lot_fruit() -> void:
-	_now_fruit = _next_fruit
+# 次の動物を抽選する.
+func _lot_animal() -> void:
+	_now_animal = _next_animal
 	# コピー.
 	var tbl = NEXT_TBL.duplicate()
 	# シャッフル.
 	tbl.shuffle()
-	# NEXTのフルーツを設定.
-	_next_fruit = tbl[0]
-	_ui_next.texture = Fruit.get_fruit_tex(_next_fruit)
-	_ui_next.scale = Common.get_fruit_scale(_next_fruit)
+	# NEXTの動物を設定.
+	_next_animal = tbl[0]
+	_ui_next.texture = Animal.get_animal_tex(_next_animal)
+	_ui_next.scale = Common.get_animal_scale(_next_animal)
 	
-	# 落下させるフルーツを設定.
-	_ui_now_fruit.texture = Fruit.get_fruit_tex(_now_fruit)	
-	_ui_now_fruit.scale = Common.get_fruit_scale(_now_fruit)
-	_ui_now_fruit.modulate.a = 0.5
+	# 落下させる動物を設定.
+	_ui_now_animal.texture = Animal.get_animal_tex(_now_animal)	
+	_ui_now_animal.scale = Common.get_animal_scale(_now_animal)
+	_ui_now_animal.modulate.a = 0.5
 
 ## 更新.
 func _process(delta: float) -> void:
@@ -149,8 +149,8 @@ func _process(delta: float) -> void:
 
 ## 更新 > 初期化.
 func _update_init() -> void:
-	# フルーツを抽選.
-	_lot_fruit()
+	# 動物を抽選.
+	_lot_animal()
 	_state = eState.MAIN
 
 ## 更新 > メイン.	
@@ -171,16 +171,16 @@ func _update_main(delta) -> void:
 	if Input.is_action_just_pressed("click"):
 		# クリックした.
 		Common.play_se("drop", 1)
-		# UIとしてのフルーツを非表示.
-		_ui_now_fruit.visible = false
+		# UIとしての動物を非表示.
+		_ui_now_animal.visible = false
 		_spr_line.visible = false
 		
 		# @note 生成すると内部でレイヤーへの追加もしてくれる.
-		var fruit = Common.create_fruit(_now_fruit)
-		fruit.position = _ui_now_fruit.position
+		var animal = Common.create_animal(_now_animal)
+		animal.position = _ui_now_animal.position
 		
-		# 落下中のフルーツを保持 (落下完了判定用).
-		_fruit = fruit
+		# 落下中の動物を保持 (落下完了判定用).
+		_animal = animal
 		# 落下完了待ち.
 		_state = eState.DROP_WAIT
 
@@ -197,13 +197,13 @@ func _update_drop_wait(delta:float) -> void:
 		_state = eState.GAME_OVER
 		return	
 	
-	if _is_dropped(_fruit) == false:
+	if _is_dropped(_animal) == false:
 		return # 落下完了待ち.
 	
 	# 落下完了した.
-	_fruit = null # 参照を消しておく.
-	# フルーツを抽選.
-	_lot_fruit()
+	_animal = null # 参照を消しておく.
+	# 動物を抽選.
+	_lot_animal()
 	_state = eState.MAIN
 
 ## 更新 > ゲームオーバー.
@@ -217,23 +217,23 @@ func _update_cursor() -> void:
 	# 移動可能範囲でclamp.
 	px = clamp(px, _marker_left.position.x, _marker_right.position.x)
 	
-	# フルーツカーソルを表示.
-	_ui_now_fruit.visible = true
-	_ui_now_fruit.position.x = px	
-	_ui_now_fruit.position.y = DROP_POS_Y
+	# 動物カーソルを表示.
+	_ui_now_animal.visible = true
+	_ui_now_animal.position.x = px	
+	_ui_now_animal.position.y = DROP_POS_Y
 	# 落下補助線を表示.
 	_spr_line.visible = true
 	_spr_line.position.x = px
 	_spr_line.modulate.a = 0.5
 
-## 指定のフルーツが落下完了したかどうか.
+## 指定の動物が落下完了したかどうか.
 ## @note 引数の型を指定するとnullのときに実行時エラーとなる.
 func _is_dropped(node) -> bool:
 	if is_instance_valid(node) == false:
 		return true # 無効なインスタンスであれば完了したことにする.
 		
-	var fruit = node as Fruit
-	if fruit.is_hit_even_once():
+	var animal = node as Animal
+	if animal.is_hit_even_once():
 		return true # 一度でも他のオブジェクトに接触した.
 	
 	# 落下完了していない.
@@ -241,9 +241,9 @@ func _is_dropped(node) -> bool:
 
 ## ゲームオーバーかどうか.
 func _is_gameoveer(delta:float) -> bool:
-	for obj in _fruit_layer.get_children():
-		var fruit = obj as Fruit
-		if fruit.check_gameover(_deadline.position.y, delta):
+	for obj in _animal_layer.get_children():
+		var animal = obj as Animal
+		if animal.check_gameover(_deadline.position.y, delta):
 			# ゲームオーバー猶予時間を超えた.
 			return true
 	
@@ -256,15 +256,15 @@ func _start_gameover() -> void:
 	#_bgm.stop()
 	# 物理挙動を止める.
 	PhysicsServer2D.set_active(false)
-	for obj in _fruit_layer.get_children():
-		# フルーツの更新をすべて止める.
+	for obj in _animal_layer.get_children():
+		# 動物の更新をすべて止める.
 		obj.set_physics_process(false)
 	
 	# キャプション表示.
 	_ui_caption.visible = true
 	# カーソルを非表示.
 	_spr_line.visible = false
-	_ui_now_fruit.visible = false
+	_ui_now_animal.visible = false
 
 
 ## 更新 > UI.
@@ -283,22 +283,22 @@ func _update_ui(delta:float) -> void:
 		_ui_score_sub.visible = true
 		_ui_score_sub.text = "(+%d)"%Common.disp_add_score
 	
-	# フルーツ登場タイマー反映.
-	Common.update_fruit_timer(delta)
+	# 動物登場タイマー反映.
+	Common.update_animal_timer(delta)
 	for id in _evolution_sprs.keys():
-		var t = Common.get_fruit_timer(id)
+		var t = Common.get_animal_timer(id)
 		var scale = _evolution_scales[id]
 		if t > 0:
 			var rate = 1 + Ease.elastic_out(1 - t)
 			scale *= (Vector2.ONE * rate)
 		_evolution_sprs[id].scale = scale
 	
-	# フルーツの生成数をカウントする.
+	# 動物の生成数をカウントする.
 	var tbl = {}
-	var max_id = Fruit.eFruit.BULLET
-	for obj in _fruit_layer.get_children():
-		var fruit = obj as Fruit
-		var id = fruit.id
+	var max_id = Animal.eAnimal.AMOEBA
+	for obj in _animal_layer.get_children():
+		var animal = obj as Animal
+		var id = animal.id
 		if id in tbl:
 			tbl[id] += 1 # 登録済みならカウントアップ.
 		else:
@@ -308,25 +308,25 @@ func _update_ui(delta:float) -> void:
 			max_id = id
 	
 	# BGMの更新.
-	if max_id >= Fruit.eFruit.XBOX:
+	if max_id >= Animal.eAnimal.FUTURE_PERSON:
 		if _bgm_id < 4:
 			# XBOXが出たらBGM変更.
 			_bgm.stream = load("res://assets/sound/bgm/bgm05_140.mp3")
 			_bgm.play()
 			_bgm_id = 5
-	elif max_id >= Fruit.eFruit.PUDDING:
+	elif max_id >= Animal.eAnimal.MONKEY:
 		if _bgm_id < 3:
 			# プリンが出たらBGM変更.
 			_bgm.stream = load("res://assets/sound/bgm/bgm04_110.mp3")
 			_bgm.play()
 			_bgm_id = 3 
-	elif max_id >= Fruit.eFruit.MILK:
+	elif max_id >= Animal.eAnimal.CAT:
 		if _bgm_id < 2:
 			# 牛乳が出たらBGM変更.
 			_bgm.stream = load("res://assets/sound/bgm/bgm03_140.mp3")
 			_bgm.play()
 			_bgm_id = 2
-	elif max_id >= Fruit.eFruit.FIVE_BOX:
+	elif max_id >= Animal.eAnimal.PLATYPUS:
 		if _bgm_id < 1:
 			# 5箱が出たらBGM変更.
 			_bgm.stream = load("res://assets/sound/bgm/bgm02_140.mp3")
@@ -335,10 +335,10 @@ func _update_ui(delta:float) -> void:
 	
 	# 進化の輪の更新.
 	_ui_evolution_label.text = ""
-	var values = Fruit.eFruit.values()
+	var values = Animal.eAnimal.values()
 	values.reverse()
 	for id in values:
-		var s = Fruit.get_fruit_name(id)
+		var s = Animal.get_animal_name(id)
 		if id in tbl:
 			_ui_evolution_label.text += s + ":%d\n"%tbl[id]
 		else:
@@ -347,17 +347,17 @@ func _update_ui(delta:float) -> void:
 ## ゲームオーバーのラインを超えているときに表示するゲージの更新.
 func _update_dead_line_gauge() -> void:
 	var max_rate = 0.0 # 最大の割合.
-	var max_obj:Fruit = null # ゲームオーバーのライン超えしているフルーツ.
+	var max_obj:Animal = null # ゲームオーバーのライン超えしている動物.
 	
 	# ゲームオーバータイマーが最大のオブジェクトを探す.
-	for obj in _fruit_layer.get_children():
-		var fruit = obj as Fruit
+	for obj in _animal_layer.get_children():
+		var animal = obj as Animal
 		# ゲームオーバータイマーが最大のオブジェクトにゲージをつける.
-		var rate = fruit.get_gameover_timer_rate()
+		var rate = animal.get_gameover_timer_rate()
 		if rate > max_rate:
 			# 最大時間の更新.
 			max_rate = rate
-			max_obj = fruit
+			max_obj = animal
 	
 	if max_obj:
 		# ゲームオーバーゲージの表示.

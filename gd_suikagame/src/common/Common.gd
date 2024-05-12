@@ -8,8 +8,8 @@ extends Node
 ## 同時再生可能なサウンドの数.
 const MAX_SOUND = 8
 
-## フルーツ登場タイマー.
-const TIMER_FRUIT_APPEAR = 1.0
+## 動物登場タイマー.
+const TIMER_ANIMAL_APPEAR = 1.0
 
 ### SEテーブル.
 var _snd_tbl = {
@@ -20,20 +20,20 @@ var _snd_tbl = {
 # -----------------------------------------------
 # preload.
 # -----------------------------------------------
-## フルーツテーブル.
-const FRUIT_TBL = {
-	Fruit.eFruit.BULLET: preload("res://src/fruit/FruitBullet.tscn"),
-	Fruit.eFruit.CARROT: preload("res://src/fruit/FruitCarrot.tscn"),
-	Fruit.eFruit.RADISH: preload("res://src/fruit/FruitRadish.tscn"),
-	Fruit.eFruit.POCKY: preload("res://src/fruit/FruitPocky.tscn"),
-	Fruit.eFruit.BANANA: preload("res://src/fruit/FruitBanana.tscn"),
-	Fruit.eFruit.NASU: preload("res://src/fruit/FruitNasu.tscn"),
-	Fruit.eFruit.TAKO: preload("res://src/fruit/FruitTako.tscn"),
-	Fruit.eFruit.NYA: preload("res://src/fruit/FruitNya.tscn"),
-	Fruit.eFruit.FIVE_BOX: preload("res://src/fruit/Fruit5Box.tscn"),
-	Fruit.eFruit.MILK: preload("res://src/fruit/FruitMilk.tscn"),
-	Fruit.eFruit.PUDDING: preload("res://src/fruit/FruitPudding.tscn"),
-	Fruit.eFruit.XBOX: preload("res://src/fruit/FruitXBox.tscn"),	
+## 動物テーブル.
+const ANIMAL_TBL = {
+	Animal.eAnimal.AMOEBA: preload("res://src/animal/AnimalAmoeba.tscn"),
+	Animal.eAnimal.JELLYFISH: preload("res://src/animal/AnimalJellyfish.tscn"),
+	Animal.eAnimal.SQUID: preload("res://src/animal/AnimalSquid.tscn"),
+	Animal.eAnimal.CRAYFISH: preload("res://src/animal/AnimalCrayfish.tscn"),
+	Animal.eAnimal.SHARK: preload("res://src/animal/AnimalShark.tscn"),
+	Animal.eAnimal.FROG: preload("res://src/animal/AnimalFrog.tscn"),
+	Animal.eAnimal.CROCODILE: preload("res://src/animal/AnimalCrocodile.tscn"),
+	Animal.eAnimal.OWL: preload("res://src/animal/AnimalOwl.tscn"),
+	Animal.eAnimal.PLATYPUS: preload("res://src/animal/AnimalPlatypus.tscn"),
+	Animal.eAnimal.CAT: preload("res://src/animal/AnimalCat.tscn"),
+	Animal.eAnimal.MONKEY: preload("res://src/animal/AnimalMonkey.tscn"),
+	Animal.eAnimal.FUTURE_PERSON: preload("res://src/animal/AnimalFuturePerson.tscn"),	
 }
 
 # -----------------------------------------------
@@ -44,11 +44,11 @@ var _snds:Array = []
 ## CanvasLayer.
 var _layers = {}
 
-## フルーツのスケールテーブル.
+## 動物のスケールテーブル.
 var _scale_tbl = {}
 
-## フルーツの登場タイマーテーブル.
-var _fruit_timers = {}
+## 動物の登場タイマーテーブル.
+var _animal_timers = {}
 
 ## スコア.
 var score:int = 0
@@ -64,8 +64,8 @@ var disp_add_score:int = 0
 func setup(layers) -> void:
 	# スコア初期化.
 	score = 0
-	# フルーツタイマー初期化.
-	_fruit_timers.clear()
+	# 動物タイマー初期化.
+	_animal_timers.clear()
 	_layers = layers
 	
 	# AudioStreamPlayerをあらかじめ作っておく.
@@ -83,7 +83,7 @@ func get_layer(layer_name:String) -> CanvasLayer:
 	
 ## スコア加算.
 ## @return 加算したスコアの値.
-func add_score(id:Fruit.eFruit) -> int:
+func add_score(id:Animal.eAnimal) -> int:
 	# スコアの式は Σ(n-1)らしい....
 	var v = 0
 	for i in range(id, 0, -1):
@@ -94,23 +94,23 @@ func add_score(id:Fruit.eFruit) -> int:
 	
 	return v
 
-## フルーツの生成.
+## 動物の生成.
 ## @note ※遅延生成をする場合のみスコアが加算されます.
-## @param id フルーツID.
+## @param id 動物ID.
 ## @param is_deferred 遅延生成するかどうか.
 ## @param particle/pos スコアパーティクルを生成するときの座標.
-func create_fruit(id:Fruit.eFruit, is_deferred:bool=false, particle_pos:Vector2=Vector2.ZERO) -> Fruit:
+func create_animal(id:Animal.eAnimal, is_deferred:bool=false, particle_pos:Vector2=Vector2.ZERO) -> Animal:
 	# PackedSceneを取得.
-	var packed = FRUIT_TBL[id]
-	var fruit = packed.instantiate()
-	var layer = get_layer("fruit")
+	var packed = ANIMAL_TBL[id]
+	var animal = packed.instantiate()
+	var layer = get_layer("animal")
 	if is_deferred:
 		# RigidBody2D の body_entered シグナルで
 		# add_child()するとエラーとなるっぽい.
 		# そのため遅延処理で対処する.
-		layer.call_deferred("add_child", fruit)
-		# フルーツタイマー設定.
-		_fruit_timers[id] = TIMER_FRUIT_APPEAR
+		layer.call_deferred("add_child", animal)
+		# 動物タイマー設定.
+		_animal_timers[id] = TIMER_ANIMAL_APPEAR
 		# スコア加算.
 		var score = add_score(id)
 		# スコア演出生成.
@@ -120,35 +120,35 @@ func create_fruit(id:Fruit.eFruit, is_deferred:bool=false, particle_pos:Vector2=
 		# マージSE.
 		Common.play_se("merge", 2)
 	else:
-		layer.add_child(fruit)
+		layer.add_child(animal)
 	
-	return fruit
+	return animal
 	
-## フルーツ登場タイマーの更新.
-func update_fruit_timer(delta:float) -> void:
-	for id in _fruit_timers.keys():
-		if _fruit_timers[id] > 0:
-			_fruit_timers[id] -= delta
-## フルーツ登場タイマーの取得.
-func get_fruit_timer(id:Fruit.eFruit) -> float:
+## 動物登場タイマーの更新.
+func update_animal_timer(delta:float) -> void:
+	for id in _animal_timers.keys():
+		if _animal_timers[id] > 0:
+			_animal_timers[id] -= delta
+## 動物登場タイマーの取得.
+func get_animal_timer(id:Animal.eAnimal) -> float:
 	var ret = 0.0
-	if id in _fruit_timers:
-		ret = _fruit_timers[id]
+	if id in _animal_timers:
+		ret = _animal_timers[id]
 	return max(ret, 0)
 
-## フルーツの基準スケール値を取得する.
-func get_fruit_scale(id:Fruit.eFruit) -> Vector2:
+## 動物の基準スケール値を取得する.
+func get_animal_scale(id:Animal.eAnimal) -> Vector2:
 	if id in _scale_tbl:
 		# すでに登録済みならその値を使う.
 		return _scale_tbl[id]
 	
 	# PackedSceneを取得.
-	var packed:PackedScene = FRUIT_TBL[id]
-	var fruit = packed.instantiate()
+	var packed:PackedScene = ANIMAL_TBL[id]
+	var animal = packed.instantiate()
 	# 登録してすぐに消す.
-	add_child(fruit)
-	fruit.queue_free()
-	var scale = fruit.get_sprite_scale()
+	add_child(animal)
+	animal.queue_free()
+	var scale = animal.get_sprite_scale()
 	# テーブルに登録.
 	_scale_tbl[id] = scale
 	return scale

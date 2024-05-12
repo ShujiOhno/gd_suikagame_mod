@@ -1,34 +1,36 @@
-[gd_scene load_steps=24 format=3 uid="uid://ma78kqfw7f7"]
+[gd_scene load_steps=25 format=3 uid="uid://ma78kqfw7f7"]
 
-[ext_resource type="PackedScene" uid="uid://bl0fa1266u1ui" path="res://src/Wall.tscn" id="1_oijm6"]
 [ext_resource type="Script" path="res://Main.gd" id="1_pv48b"]
-[ext_resource type="Texture2D" uid="uid://dxslapi3n2boa" path="res://assets/images/bg.png" id="2_k5l3r"]
-[ext_resource type="Texture2D" uid="uid://cuecpqwmb8218" path="res://assets/images/line.png" id="3_laf43"]
-[ext_resource type="Texture2D" uid="uid://7glji5pwsndi" path="res://assets/images/fruits/nasu.png" id="4_4ngh3"]
-[ext_resource type="Texture2D" uid="uid://barmfesnbpy6b" path="res://assets/images/deadline.png" id="4_bkswg"]
+[ext_resource type="Texture2D" uid="uid://bglxqwhwadppv" path="res://assets/images/bg.png" id="2_k5l3r"]
+[ext_resource type="Texture2D" uid="uid://pm0ckhneo3d4" path="res://assets/images/line.png" id="3_laf43"]
+[ext_resource type="Texture2D" uid="uid://bl678fbwr8rwe" path="res://assets/images/glass.png" id="3_u7tm2"]
+[ext_resource type="Texture2D" uid="uid://diuywfknrun06" path="res://assets/images/animals/crocodile.png" id="4_4ngh3"]
+[ext_resource type="Texture2D" uid="uid://i1vlcodhvujg" path="res://assets/images/deadline.png" id="4_bkswg"]
 [ext_resource type="LabelSettings" uid="uid://b6l1ol3drb1s3" path="res://assets/fonts/font_m.tres" id="6_la6a2"]
-[ext_resource type="Texture2D" uid="uid://c0e855ot4gupe" path="res://assets/images/fruits/xbox.png" id="7_qswyg"]
-[ext_resource type="Texture2D" uid="uid://by202g350fgiw" path="res://assets/images/fruits/pudding.png" id="8_56qcn"]
-[ext_resource type="Texture2D" uid="uid://dai5i4hthmn3l" path="res://assets/images/fruits/milk.png" id="9_knyi6"]
-[ext_resource type="Texture2D" uid="uid://crhjjgy7ldidi" path="res://assets/images/fruits/5box.png" id="10_pgpkf"]
-[ext_resource type="Texture2D" uid="uid://unv1wni44n26" path="res://assets/images/fruits/nya.png" id="11_x0aan"]
-[ext_resource type="Texture2D" uid="uid://cbsc1128fu0iv" path="res://assets/images/fruits/tako.png" id="12_t62x5"]
-[ext_resource type="Texture2D" uid="uid://do6fj5m8j1yfi" path="res://assets/images/fruits/banana.png" id="13_wo8dq"]
-[ext_resource type="Texture2D" uid="uid://coivkyhfv8px4" path="res://assets/images/fruits/pocky.png" id="14_6i5f7"]
-[ext_resource type="Texture2D" uid="uid://bf16ywylbkvxl" path="res://assets/images/fruits/radish.png" id="15_31kmj"]
-[ext_resource type="Texture2D" uid="uid://b6sv52878sptj" path="res://assets/images/fruits/carrot.png" id="16_bo7ty"]
-[ext_resource type="Texture2D" uid="uid://cmxcbwt8hjjjw" path="res://assets/images/fruits/bullet.png" id="17_q82em"]
+[ext_resource type="Texture2D" uid="uid://5fb0flgpn81r" path="res://assets/images/animals/future_person.png" id="7_qswyg"]
+[ext_resource type="Texture2D" uid="uid://bqx6syb7kvsyj" path="res://assets/images/animals/monkey.png" id="8_56qcn"]
+[ext_resource type="Texture2D" uid="uid://bop6m0b38jgeo" path="res://assets/images/animals/cat.png" id="9_knyi6"]
+[ext_resource type="Texture2D" uid="uid://bni33tr156ngc" path="res://assets/images/animals/platypus.png" id="10_pgpkf"]
+[ext_resource type="Texture2D" uid="uid://ckuymsmy3log7" path="res://assets/images/animals/owl.png" id="12_j1h58"]
+[ext_resource type="Texture2D" uid="uid://bhuitanxoe2vc" path="res://assets/images/animals/frog.png" id="13_lmcmq"]
+[ext_resource type="Texture2D" uid="uid://b3rarywc4agyx" path="res://assets/images/animals/shark.png" id="13_wo8dq"]
+[ext_resource type="Texture2D" uid="uid://ssmm241c2aaw" path="res://assets/images/animals/crayfish.png" id="14_6i5f7"]
+[ext_resource type="Texture2D" uid="uid://d0g3ol5cdfw4a" path="res://assets/images/animals/squid.png" id="15_31kmj"]
+[ext_resource type="Texture2D" uid="uid://c1t8e4fsom85b" path="res://assets/images/animals/jellyfish.png" id="16_bo7ty"]
+[ext_resource type="Texture2D" uid="uid://yut4f2yva2c" path="res://assets/images/animals/amoeba.png" id="17_q82em"]
 [ext_resource type="LabelSettings" uid="uid://ci0gmxa12joer" path="res://assets/fonts/font_l.tres" id="19_jpi46"]
-[ext_resource type="Texture2D" uid="uid://bro55p3g1imuh" path="res://assets/images/gauge_under.png" id="20_topfu"]
-[ext_resource type="Texture2D" uid="uid://dohq48jhepu3o" path="res://assets/images/gauge_progress.png" id="21_cfs7a"]
-[ext_resource type="AudioStream" uid="uid://bav6ooqlvwhsw" path="res://assets/sound/bgm/bgm01_130.mp3" id="22_7yljx"]
+[ext_resource type="Texture2D" uid="uid://dcw23ijgqv61a" path="res://assets/images/gauge_under.png" id="20_topfu"]
+[ext_resource type="Texture2D" uid="uid://bjx21bq3nbjht" path="res://assets/images/gauge_progress.png" id="21_cfs7a"]
+[ext_resource type="AudioStream" uid="uid://2cof0fde5j6s" path="res://assets/sound/bgm/bgm01_130.mp3" id="22_7yljx"]
 [ext_resource type="LabelSettings" uid="uid://hgpq80s0wk7j" path="res://assets/fonts/font_s.tres" id="22_b3ye2"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rugfw"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_pv48b")
 
 [node name="Bg" type="Sprite2D" parent="."]
-position = Vector2(576, 218)
+position = Vector2(575, 218)
 scale = Vector2(1.8, 1.79167)
 texture = ExtResource("2_k5l3r")
 
@@ -52,25 +54,26 @@ position = Vector2(736, 128)
 
 [node name="WallLayer" type="CanvasLayer" parent="."]
 
-[node name="Wall" parent="WallLayer" instance=ExtResource("1_oijm6")]
-position = Vector2(384, 64)
-scale = Vector2(0.08, 9.12)
+[node name="Wall" type="StaticBody2D" parent="WallLayer"]
+physics_material_override = SubResource("PhysicsMaterial_rugfw")
 
-[node name="Wall3" parent="WallLayer" instance=ExtResource("1_oijm6")]
-position = Vector2(576, 640)
-scale = Vector2(3.08, 0.199999)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WallLayer/Wall"]
+position = Vector2(564, 320)
+scale = Vector2(0.806272, 0.631024)
+polygon = PackedVector2Array(-319.991, -839.904, -288.984, -424.706, -265.419, -144.21, -200.925, 223.446, -158.755, 361.317, -76.8971, 459.57, 19.8444, 480.172, 132.71, 459.57, 199.684, 348.64, 248.055, 210.768, 292.705, -156.888, 321.231, -431.045, 327.433, -839.904, 395.648, -836.735, 360.92, 519.79, -364.641, 526.129, -380.765, -844.659)
 
-[node name="Wall2" parent="WallLayer" instance=ExtResource("1_oijm6")]
-position = Vector2(768, 64)
-scale = Vector2(0.08, 9.12)
+[node name="Sprite2D" type="Sprite2D" parent="WallLayer"]
+position = Vector2(569, 320)
+scale = Vector2(0.796596, 0.617188)
+texture = ExtResource("3_u7tm2")
 
-[node name="FruitLayer" type="CanvasLayer" parent="."]
+[node name="AnimalLayer" type="CanvasLayer" parent="."]
 
 [node name="ParticleLayer" type="CanvasLayer" parent="."]
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
-[node name="NowFruit" type="Sprite2D" parent="UILayer"]
+[node name="NowAnimal" type="Sprite2D" parent="UILayer"]
 visible = false
 texture = ExtResource("4_4ngh3")
 
@@ -86,63 +89,64 @@ label_settings = ExtResource("6_la6a2")
 [node name="Evolution" type="Node2D" parent="UILayer"]
 position = Vector2(904, 32)
 
-[node name="Xbox" type="Sprite2D" parent="UILayer/Evolution"]
+[node name="FuturePerson" type="Sprite2D" parent="UILayer/Evolution"]
 position = Vector2(24, 24)
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.14, 0.14)
 texture = ExtResource("7_qswyg")
 
-[node name="Pudding" type="Sprite2D" parent="UILayer/Evolution"]
+[node name="Monkey" type="Sprite2D" parent="UILayer/Evolution"]
 position = Vector2(24, 72)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("8_56qcn")
 
-[node name="Milk" type="Sprite2D" parent="UILayer/Evolution"]
+[node name="Cat" type="Sprite2D" parent="UILayer/Evolution"]
 position = Vector2(24, 120)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("9_knyi6")
 
-[node name="5Box" type="Sprite2D" parent="UILayer/Evolution"]
-position = Vector2(24, 168)
-scale = Vector2(0.3, 0.3)
+[node name="Platypus" type="Sprite2D" parent="UILayer/Evolution"]
+position = Vector2(24, 168.1)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("10_pgpkf")
 
-[node name="Nya" type="Sprite2D" parent="UILayer/Evolution"]
+[node name="Owl" type="Sprite2D" parent="UILayer/Evolution"]
 position = Vector2(24, 216)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("11_x0aan")
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("12_j1h58")
 
-[node name="Tako" type="Sprite2D" parent="UILayer/Evolution"]
+[node name="Crocodile" type="Sprite2D" parent="UILayer/Evolution"]
 position = Vector2(24, 264)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("12_t62x5")
-
-[node name="Nasu" type="Sprite2D" parent="UILayer/Evolution"]
-position = Vector2(24, 312)
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_4ngh3")
 
-[node name="Banana" type="Sprite2D" parent="UILayer/Evolution"]
+[node name="Frog" type="Sprite2D" parent="UILayer/Evolution"]
+position = Vector2(24, 312)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("13_lmcmq")
+
+[node name="Shark" type="Sprite2D" parent="UILayer/Evolution"]
 position = Vector2(24, 360)
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("13_wo8dq")
 
-[node name="Pocky" type="Sprite2D" parent="UILayer/Evolution"]
+[node name="Crayfish" type="Sprite2D" parent="UILayer/Evolution"]
 position = Vector2(24, 408)
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("14_6i5f7")
 
-[node name="Radish" type="Sprite2D" parent="UILayer/Evolution"]
+[node name="Squid" type="Sprite2D" parent="UILayer/Evolution"]
 position = Vector2(24, 456)
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("15_31kmj")
 
-[node name="Carrot" type="Sprite2D" parent="UILayer/Evolution"]
+[node name="Jellyfish" type="Sprite2D" parent="UILayer/Evolution"]
 position = Vector2(24, 504)
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.26, 0.26)
 texture = ExtResource("16_bo7ty")
 
-[node name="Bullet" type="Sprite2D" parent="UILayer/Evolution"]
+[node name="Amoeba" type="Sprite2D" parent="UILayer/Evolution"]
 position = Vector2(24, 552)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("17_q82em")
 
 [node name="Label" type="Label" parent="UILayer/Evolution"]

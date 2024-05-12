@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcbb1hltbq3y7"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://d1ukrhuj3jrd0" path="res://assets/animal_physics_material.tres" id="1_mm4fr"]
+[ext_resource type="Script" path="res://src/animal/Animal.gd" id="2_7lbwm"]
+[ext_resource type="Texture2D" uid="uid://d0g3ol5cdfw4a" path="res://assets/images/animals/squid.png" id="3_ovrjo"]
+
+[node name="AnimalSquid" type="RigidBody2D"]
+physics_material_override = ExtResource("1_mm4fr")
+max_contacts_reported = 8
+contact_monitor = true
+script = ExtResource("2_7lbwm")
+id = 2
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.24, 0.24)
+texture = ExtResource("3_ovrjo")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.12, 0.12)
+polygon = PackedVector2Array(84, -245.5, 84, -243.1, 138, -217.1, 138, -214.9, 181, -165.9, 181, -163.5, 244, -65.5, 244, -58.7, 169, -27.7, 169, 27, 165.1, 27, 132, 61.1, 132, 113, 140.7, 128.6, 168, 121.2, 168, 104, 154.1, 86.7, 156.9, 81, 169.7, 81, 207, 110.6, 207, 115, 213.8, 159, 209.9, 159, 191.8, 189, 188.4, 189, 165.4, 203, 160.3, 203, 132.4, 208, 126.4, 208, 76.3, 195, 55.3, 246, 51.2, 246, 33, 248.8, 33, 242.6, 27.6, 200, -0.300003, 175.3, -35, 210, -35, 210.8, -46.4, 245, -50.5, 245, -70, 249.2, -70, 243.3, -77, 231.4, -77, 209.7, -71.4, 160.8, -96, 139.3, -96, 135.7, -97.6, 123.6, -112.6, 113, -114.2, 113, -175, 107.6, -175, 105.1, -211, 87.1, -211, 84.7, -243, 42.7, -243, 38, -248.8, 0, -246.2, 0, -241.3, -31, -238.6, -31, -213, -67.6, -213, -70.1, -221.8, -98, -212.1, -98, -178, -67.2, -178, -55.9, -192.9, -23.3, -178.2, 2, -148.1, 14, -118.1, 14, -71.9, -8.2, -69.7, -45, -67.3, -45, -63.8, -53, -85.7, -41, -90.5, -41, -105, -43.9, -105, -46.8, -152, -88.8, -152, -91.7, -178.2, -143, -170, -143, -91, -180.1, -18.7, -235, -14.8, -235, 38, -248, 38, -250.6)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
